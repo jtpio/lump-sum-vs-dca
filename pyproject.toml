@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling>=1.5.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lump-sum-vs-dca"
+version = "0.1.0"
+description = "Interactive analysis comparing Lump Sum vs Dollar Cost Averaging investment strategies using 53 years of MSCI World data"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "ipywidgets>=8.1,<9",
+    "ipecharts>=1.4.0",
+    "jupyterlab>=4.0",
+    "voici-core>=0.10.0",
+    "jupyterlite-pyodide-kernel>=0.7.0",
+    "nbdime>=4.0.2",
+    "ruff>=0.14.10",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.1",
+]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"templates/blog" = "share/jupyter/voila/templates/blog"

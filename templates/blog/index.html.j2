@@ -1,0 +1,324 @@
+{%- extends 'nbconvert/templates/lab/index.html.j2' -%}
+{% import "spinner.macro.html.j2" as spinner %}
+{% import "log.macro.html.j2" as log %}
+{% from 'voila_setup.macro.html.j2' import voila_setup_helper_functions, voila_setup_labextensions with context %}
+
+{%- block html_head_js -%}
+{%- block html_head_js_logs -%}
+{{ log.js() }}
+{%- endblock html_head_js_logs -%}
+{%- endblock html_head_js -%}
+
+{%- block notebook_css -%}
+  {% if frontend == "voila" %}
+    {{ resources.include_js("static/voila-style.js") }}
+  {% endif %}
+
+  {{ spinner.css() }}
+
+  <style>
+    /*Hide empty cells*/
+    .jp-mod-noOutputs.jp-mod-noInput {
+      display: none;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@^5/css/all.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@^5/css/v4-shims.min.css" type="text/css" />
+
+  {{ super() }}
+
+<style>
+/* Blog-style typography and layout */
+
+/* Ensure centered content like a blog article */
+body {
+  background: var(--jp-layout-color1);
+}
+
+#rendered_cells {
+  padding-left: calc((100% - 900px) * 0.5);
+  padding-right: calc((100% - 900px) * 0.5);
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+#rendered_cells > div {
+  background: var(--jp-layout-color0);
+  padding: 3rem 4rem 4rem 4rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Typography improvements */
+.jp-RenderedMarkdown {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-RenderedMarkdown h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  border-bottom: none;
+  color: var(--jp-ui-font-color0);
+}
+
+.jp-RenderedMarkdown h1:first-child {
+  margin-top: 0;
+}
+
+.jp-RenderedMarkdown h4 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--jp-ui-font-color2);
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.jp-RenderedMarkdown h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--jp-border-color2);
+  color: var(--jp-ui-font-color0);
+}
+
+.jp-RenderedMarkdown h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--jp-ui-font-color0);
+}
+
+.jp-RenderedMarkdown p {
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+}
+
+.jp-RenderedMarkdown strong {
+  font-weight: 600;
+  color: var(--jp-ui-font-color0);
+}
+
+.jp-RenderedMarkdown em {
+  color: var(--jp-ui-font-color2);
+}
+
+.jp-RenderedMarkdown ul, .jp-RenderedMarkdown ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.jp-RenderedMarkdown li {
+  margin-bottom: 0.5rem;
+}
+
+.jp-RenderedMarkdown a {
+  color: #73c0de;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.jp-RenderedMarkdown a:hover {
+  border-bottom-color: #73c0de;
+}
+
+/* Blockquote styling */
+.jp-RenderedMarkdown blockquote {
+  border-left: 4px solid #73c0de;
+  margin: 1.5rem 0;
+  padding: 0.75rem 1.5rem;
+  background: var(--jp-layout-color1);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--jp-ui-font-color2);
+}
+
+/* Code styling */
+.jp-RenderedMarkdown code {
+  background: var(--jp-layout-color2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.jp-RenderedMarkdown pre {
+  background: var(--jp-layout-color2);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+/* Horizontal rule as section divider */
+.jp-RenderedMarkdown hr {
+  border: none;
+  height: 2px;
+  background: var(--jp-border-color2);
+  margin: 3rem 0;
+}
+
+/* Output cells (widgets, charts) - give them breathing room */
+.jp-OutputArea-output {
+  margin: 1.5rem 0;
+}
+
+/* Widget container improvements */
+.widget-container {
+  margin: 1rem 0;
+}
+
+/* Make ipywidgets inputs look cleaner */
+.widget-text input,
+.widget-dropdown select,
+.widget-floattext input,
+.widget-inttext input {
+  border-radius: 6px !important;
+  border: 1px solid var(--jp-border-color1) !important;
+  padding: 0.5rem !important;
+}
+
+/* Button styling */
+.jupyter-button {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Card-like containers from the notebook look better with subtle shadows */
+.jp-OutputArea-output > div[style*="background"] {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  #rendered_cells {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #rendered_cells > div {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #rendered_cells > div {
+    padding: 1.5rem 1rem;
+    border-radius: 0;
+  }
+
+  .jp-RenderedMarkdown h1 {
+    font-size: 1.75rem;
+  }
+
+  .jp-RenderedMarkdown h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Wider content on large screens */
+@media (min-width: 1400px) {
+  #rendered_cells {
+    padding-left: calc((100% - 1100px) * 0.5);
+    padding-right: calc((100% - 1100px) * 0.5);
+  }
+
+  #rendered_cells > div {
+    max-width: 1100px;
+  }
+}
+</style>
+{%- endblock notebook_css -%}
+
+{%- block html_head_js_mathjax -%}
+{# remove mathjax CDN #}
+{%- endblock html_head_js_mathjax -%}
+
+{# this overrides the default behaviour of rendering static widgets #}
+{% block jupyter_widgets %}
+{% endblock jupyter_widgets %}
+
+{%- block body_header -%}
+<link rel="icon" href="data:;base64,=">
+{% if resources.theme == 'dark' or resources.theme == 'JupyterLab Dark' %}
+<body class="jp-Notebook theme-dark" data-base-url="{{resources.base_url}}voila/" data-jp-theme-light="false" data-jp-theme-name="JupyterLab Dark" data-voila="voila">
+{% elif resources.theme == 'light' or resources.theme == 'JupyterLab Light' %}
+<body class="jp-Notebook theme-light" data-base-url="{{resources.base_url}}voila/" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light" data-voila="voila">
+{% else %}
+<body class="jp-Notebook" data-base-url="{{resources.base_url}}voila/" data-jp-theme-name="{{resources.theme}}" data-voila="voila">
+{% endif %}
+{{ spinner.html() }}
+{{ voila_setup_helper_functions() }}
+<div id="rendered_cells" style="display: none">
+  <div>
+{%- endblock body_header -%}
+
+{% block data_priority scoped %}
+{% if output %}
+  <script type="application/vnd.voila.cell-output+json">
+    {{ output | trusted | tojson }}
+  </script>
+{% endif %}
+{% endblock data_priority %}
+
+{%- block body_loop -%}
+  {# from this point on, the kernel is started #}
+
+  {# Copy so we do not modify the page_config with updates. #}
+  {% set page_config_full = page_config.copy() %}
+
+  {%- with kernel_id = kernel_start(nb) -%}
+    {# Set a dummy variable - we just want the side effect of the update. #}
+    {% set _ = page_config_full.update(baseUrl=resources.base_url, kernelId=kernel_id) %}
+
+    <script id="jupyter-config-data" type="application/json">
+      {{ page_config_full | tojson }}
+    </script>
+
+    {% set cell_count = nb.cells|length %}
+
+    {#
+    Voilà is using Jinja's Template.generate method to not render the whole template in one go.
+    The current implementation of Jinja will however not yield template snippets if we call a blocks' super()
+    Therefore it is important to have the cell loop in the template.
+    The issue for Jinja is: https://github.com/pallets/jinja/issues/1044
+    #}
+    {%- for cell in cell_generator(nb, kernel_id) -%}
+      {% set cellloop = loop %}
+      {%- block any_cell scoped -%}
+        <div cell-index="{{cellloop.index}}">
+          <script>
+            voila_process({{ cellloop.index }}, {{ cell_count }})
+          </script>
+          {{ super() }}
+        </div>
+      {%- endblock any_cell -%}
+    {%- endfor -%}
+  {% endwith %}
+{%- endblock body_loop -%}
+
+{%- block body_footer -%}
+  </div>
+</div>
+<script type="text/javascript">
+  window.voila_finish();
+</script>
+{{ voila_setup_labextensions(resources.base_url, resources.labextensions) }}
+{{ super() }}
+{%- endblock body_footer -%}
+
+{%- block footer %}
+{% block footer_js %}
+{% endblock footer_js %}
+</html>
+{%- endblock footer-%}
