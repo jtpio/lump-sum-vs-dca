@@ -2,7 +2,12 @@
 
 Interactive analysis comparing Lump Sum vs Dollar Cost Averaging investment strategies using 53 years of MSCI World data (1972-2025).
 
-## Try it
+## Try it online
+
+- [English version](https://jtpio.github.io/lump-sum-vs-dca/voici/render/dca_vs_lump_sum.html)
+- [French version](https://jtpio.github.io/lump-sum-vs-dca/voici/render/dca_vs_lump_sum_fr.html)
+
+## Run locally
 
 ```bash
 git clone https://github.com/jtpio/lump-sum-vs-dca.git
@@ -11,7 +16,7 @@ uv sync
 uv run jupyter lab
 ```
 
-Open `content/01_dca_vs_lump_sum.ipynb` and run all cells.
+Open one of the notebooks in the `content/` folder and run all cells.
 
 ## License
 
