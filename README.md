@@ -7,6 +7,8 @@ Interactive analysis comparing Lump Sum vs Dollar Cost Averaging investment stra
 - [English version](https://jtpio.github.io/lump-sum-vs-dca/voici/render/dca_vs_lump_sum.html)
 - [French version](https://jtpio.github.io/lump-sum-vs-dca/voici/render/dca_vs_lump_sum_fr.html)
 
+![a screenshot showing the backtest results of the Lump Sum vs DCA analysis](screenshot.png)
+
 ## Run locally
 
 ```bash
