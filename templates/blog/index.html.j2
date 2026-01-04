@@ -31,23 +31,56 @@
 <style>
 /* Blog-style typography and layout */
 
-/* Ensure centered content like a blog article */
-body {
-  background: var(--jp-layout-color1);
+/* CSS Custom Properties for theme colors */
+:root {
+  --blog-accent-primary: #73c0de;
+  --blog-accent-secondary: #91cc75;
+  --blog-success: #3fa266;
+  --blog-danger: #e34671;
+
+  /* Dark theme color palette - consistent neutral grays */
+  --blog-bg-deep: #0d0d0d;
+  --blog-bg-base: #161616;
+  --blog-bg-surface: #1e1e1e;
+  --blog-bg-elevated: #282828;
+
+  /* Override JupyterLab variables to match our palette */
+  --jp-layout-color0: var(--blog-bg-surface);
+  --jp-layout-color1: var(--blog-bg-base);
+  --jp-layout-color2: var(--blog-bg-elevated);
+  --jp-border-color0: rgba(255, 255, 255, 0.12);
+  --jp-border-color1: rgba(255, 255, 255, 0.08);
+  --jp-border-color2: rgba(255, 255, 255, 0.06);
+
+  --blog-card-bg: rgba(255, 255, 255, 0.02);
+  --blog-card-border: rgba(255, 255, 255, 0.06);
+  --blog-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --blog-input-bg: rgba(255, 255, 255, 0.04);
+  --blog-input-border: rgba(255, 255, 255, 0.08);
+  --blog-input-focus: rgba(115, 192, 222, 0.25);
 }
 
-#rendered_cells {
+/* Ensure centered content like a blog article */
+body {
+  background: var(--blog-bg-deep);
+  min-height: 100vh;
+}
+
+div#rendered_cells {
+  background: transparent !important;
+  background-color: transparent !important;
   padding-left: calc((100% - 900px) * 0.5);
   padding-right: calc((100% - 900px) * 0.5);
-  padding-top: 2rem;
-  padding-bottom: 4rem;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
 }
 
 #rendered_cells > div {
-  background: var(--jp-layout-color0);
-  padding: 3rem 4rem 4rem 4rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background: var(--blog-bg-surface);
+  padding: 3.5rem 4.5rem 4.5rem 4.5rem;
+  border-radius: 16px;
+  box-shadow: var(--blog-card-shadow);
+  border: 1px solid var(--blog-card-border);
   max-width: 900px;
   margin: 0 auto;
 }
@@ -55,16 +88,17 @@ body {
 /* Typography improvements */
 .jp-RenderedMarkdown {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--jp-ui-font-color1);
 }
 
 .jp-RenderedMarkdown h1 {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   border-bottom: none;
   color: var(--jp-ui-font-color0);
+  letter-spacing: -0.02em;
 }
 
 .jp-RenderedMarkdown h1:first-child {
@@ -72,26 +106,28 @@ body {
 }
 
 .jp-RenderedMarkdown h4 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 400;
-  color: var(--jp-ui-font-color2);
+  color: var(--blog-accent-primary);
   margin-top: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   font-style: italic;
+  opacity: 0.9;
 }
 
 .jp-RenderedMarkdown h2 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--jp-border-color2);
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--blog-accent-primary);
   color: var(--jp-ui-font-color0);
+  letter-spacing: -0.01em;
 }
 
 .jp-RenderedMarkdown h3 {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
@@ -99,8 +135,9 @@ body {
 }
 
 .jp-RenderedMarkdown p {
-  font-size: 1.05rem;
-  margin-bottom: 1.25rem;
+  font-size: 1.08rem;
+  margin-bottom: 1.35rem;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .jp-RenderedMarkdown strong {
@@ -109,120 +146,201 @@ body {
 }
 
 .jp-RenderedMarkdown em {
-  color: var(--jp-ui-font-color2);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .jp-RenderedMarkdown ul, .jp-RenderedMarkdown ol {
-  margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
+  margin-bottom: 1.35rem;
+  padding-left: 1.75rem;
 }
 
 .jp-RenderedMarkdown li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .jp-RenderedMarkdown a {
-  color: #73c0de;
+  color: var(--blog-accent-primary);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .jp-RenderedMarkdown a:hover {
-  border-bottom-color: #73c0de;
+  border-bottom-color: var(--blog-accent-primary);
+  color: #9dd5eb;
 }
 
 /* Blockquote styling */
 .jp-RenderedMarkdown blockquote {
-  border-left: 4px solid #73c0de;
-  margin: 1.5rem 0;
-  padding: 0.75rem 1.5rem;
-  background: var(--jp-layout-color1);
-  border-radius: 0 8px 8px 0;
+  border-left: 4px solid var(--blog-accent-primary);
+  margin: 1.75rem 0;
+  padding: 1rem 1.75rem;
+  background: var(--blog-card-bg);
+  border-radius: 0 12px 12px 0;
   font-style: italic;
-  color: var(--jp-ui-font-color2);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 /* Code styling */
 .jp-RenderedMarkdown code {
-  background: var(--jp-layout-color2);
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
+  background: var(--blog-input-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
   font-size: 0.9em;
+  border: 1px solid var(--blog-input-border);
 }
 
 .jp-RenderedMarkdown pre {
-  background: var(--jp-layout-color2);
-  padding: 1rem;
-  border-radius: 8px;
+  background: var(--blog-input-bg);
+  padding: 1.25rem;
+  border-radius: 10px;
   overflow-x: auto;
+  border: 1px solid var(--blog-input-border);
 }
 
 /* Horizontal rule as section divider */
 .jp-RenderedMarkdown hr {
   border: none;
-  height: 2px;
-  background: var(--jp-border-color2);
-  margin: 3rem 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blog-card-border), var(--blog-accent-primary), var(--blog-card-border), transparent);
+  margin: 3.5rem 0;
 }
 
 /* Output cells (widgets, charts) - give them breathing room */
 .jp-OutputArea-output {
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
 }
 
 /* Widget container improvements */
 .widget-container {
-  margin: 1rem 0;
+  margin: 1.25rem 0;
 }
 
-/* Make ipywidgets inputs look cleaner */
+/* VBox/HBox widget styling */
+.widget-box {
+  border-color: var(--blog-card-border) !important;
+}
+
+/* Make ipywidgets inputs look cleaner and match dark theme */
 .widget-text input,
 .widget-dropdown select,
 .widget-floattext input,
 .widget-inttext input {
-  border-radius: 6px !important;
-  border: 1px solid var(--jp-border-color1) !important;
-  padding: 0.5rem !important;
+  background: var(--blog-input-bg) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--blog-input-border) !important;
+  padding: 0.6rem 0.8rem !important;
+  color: var(--jp-ui-font-color0) !important;
+  transition: all 0.2s ease !important;
+}
+
+.widget-text input:focus,
+.widget-dropdown select:focus,
+.widget-floattext input:focus,
+.widget-inttext input:focus {
+  border-color: var(--blog-accent-primary) !important;
+  box-shadow: 0 0 0 3px var(--blog-input-focus) !important;
+  outline: none !important;
+}
+
+/* Date picker styling */
+.widget-datepicker input {
+  background: var(--blog-input-bg) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--blog-input-border) !important;
+  color: var(--jp-ui-font-color0) !important;
 }
 
 /* Button styling */
 .jupyter-button {
-  border-radius: 6px !important;
+  border-radius: 8px !important;
   font-weight: 500 !important;
-  padding: 0.5rem 1rem !important;
+  padding: 0.6rem 1.25rem !important;
   transition: all 0.2s ease !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
 }
 
-/* Card-like containers from the notebook look better with subtle shadows */
-.jp-OutputArea-output > div[style*="background"] {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.jupyter-button.mod-primary {
+  background: linear-gradient(135deg, var(--blog-accent-primary), #5ba8c6) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(115, 192, 222, 0.3) !important;
+}
+
+.jupyter-button.mod-primary:hover {
+  background: linear-gradient(135deg, #5ba8c6, var(--blog-accent-primary)) !important;
+  box-shadow: 0 4px 12px rgba(115, 192, 222, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+.jupyter-button.mod-success {
+  background: linear-gradient(135deg, var(--blog-success), #2d8a54) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(63, 162, 102, 0.3) !important;
+}
+
+.jupyter-button.mod-success:hover {
+  background: linear-gradient(135deg, #2d8a54, var(--blog-success)) !important;
+  box-shadow: 0 4px 12px rgba(63, 162, 102, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+/* Card-like containers from the notebook */
+.jp-OutputArea-output > div[style*="border"] {
+  border-color: var(--blog-card-border) !important;
+  border-radius: 12px !important;
+}
+
+/* Progress bar styling */
+.widget-progress {
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.widget-progress .progress-bar {
+  border-radius: 8px !important;
+}
+
+/* HTML widget improvements */
+.widget-html-content {
+  font-family: inherit;
 }
 
 /* Responsive adjustments */
 @media (max-width: 1000px) {
   #rendered_cells {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 
   #rendered_cells > div {
-    padding: 2rem;
+    padding: 2.5rem;
   }
 }
 
 @media (max-width: 600px) {
+  #rendered_cells {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
   #rendered_cells > div {
-    padding: 1.5rem 1rem;
+    padding: 1.75rem 1.25rem;
     border-radius: 0;
+    box-shadow: none;
   }
 
   .jp-RenderedMarkdown h1 {
-    font-size: 1.75rem;
+    font-size: 1.85rem;
   }
 
   .jp-RenderedMarkdown h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+  }
+
+  .jp-RenderedMarkdown h4 {
+    font-size: 1rem;
   }
 }
 
@@ -236,6 +354,17 @@ body {
   #rendered_cells > div {
     max-width: 1100px;
   }
+}
+
+/* Smooth scrolling */
+#rendered_cells {
+  scroll-behavior: smooth;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(115, 192, 222, 0.3);
+  color: inherit;
 }
 </style>
 {%- endblock notebook_css -%}
@@ -259,7 +388,7 @@ body {
 {% endif %}
 {{ spinner.html() }}
 {{ voila_setup_helper_functions() }}
-<div id="rendered_cells" style="display: none">
+<div id="rendered_cells" style="display: none; background: transparent !important;">
   <div>
 {%- endblock body_header -%}
 
