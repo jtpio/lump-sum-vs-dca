@@ -19,6 +19,8 @@ dependencies = [
     "ruff>=0.14.10",
     "specta>=0.4.5",
     "beautifulsoup4>=4.12",
+    "jupyterlab-cursor-dark>=1.0.2",
+    "jupyterlab-cursor-light>=1.0.2",
 ]
 
 [project.optional-dependencies]
