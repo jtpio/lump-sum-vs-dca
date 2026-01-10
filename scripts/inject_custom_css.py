@@ -13,8 +13,11 @@ CUSTOM_CSS = """
 """
 
 
-def inject_css():
-    output_dir = Path(__file__).parent.parent / "_output"
+def inject_css(output_dir=None):
+    if output_dir is None:
+        output_dir = Path(__file__).parent.parent / "_output"
+    else:
+        output_dir = Path(output_dir)
     index_path = output_dir / "specta" / "index.html"
 
     if not index_path.exists():
@@ -45,4 +48,7 @@ def inject_css():
 
 
 if __name__ == "__main__":
-    inject_css()
+    import sys
+
+    output_dir = sys.argv[1] if len(sys.argv) > 1 else None
+    inject_css(output_dir)

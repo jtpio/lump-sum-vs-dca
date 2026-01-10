@@ -28,8 +28,11 @@ jobs:
       - name: Install dependencies
         run: uv sync --locked
 
-      - name: Build the Voici site
-        run: uv run voici build --contents content --output-dir dist --theme dark --template blog
+      - name: Build the Voici and Specta sites
+        run: uv run voici build --contents content --output-dir dist --theme dark --template blog --apps lab --apps specta
+
+      - name: Inject custom CSS into Specta
+        run: uv run python scripts/inject_custom_css.py dist
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
