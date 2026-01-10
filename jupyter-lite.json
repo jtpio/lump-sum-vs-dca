@@ -1,0 +1,12 @@
+{
+  "jupyter-config-data": {
+    "spectaConfig": {
+      "hideTopbar": true,
+      "defaultLayout": "article",
+      "topBar": {
+        "title": "Lump Sum vs DCA",
+        "themeToggle": false
+      }
+    }
+  }
+}

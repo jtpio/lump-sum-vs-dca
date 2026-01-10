@@ -864,6 +864,7 @@ name = "lump-sum-vs-dca"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "beautifulsoup4" },
     { name = "ipecharts" },
     { name = "ipywidgets" },
     { name = "jupyterlab" },
@@ -872,6 +873,7 @@ dependencies = [
     { name = "numpy" },
     { name = "pandas" },
     { name = "ruff" },
+    { name = "specta" },
     { name = "voici-core" },
 ]
 
@@ -883,6 +885,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "beautifulsoup4", specifier = ">=4.12" },
     { name = "ipecharts", specifier = ">=1.4.0" },
     { name = "ipywidgets", specifier = ">=8.1,<9" },
     { name = "jupyterlab", specifier = ">=4.0" },
@@ -893,6 +896,7 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0" },
     { name = "ruff", specifier = ">=0.14.10" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.1" },
+    { name = "specta", specifier = ">=0.4.5" },
     { name = "voici-core", specifier = ">=0.10.0" },
 ]
 provides-extras = ["dev"]
@@ -1696,6 +1700,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/89/23/adf3796d740536d63a6fbda113d07e60c734b6ed5d3058d1e47fc0495e47/soupsieve-2.8.1.tar.gz", hash = "sha256:4cf733bc50fa805f5df4b8ef4740fc0e0fa6218cf3006269afd3f9d6d80fd350", size = 117856, upload-time = "2025-12-18T13:50:34.655Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/48/f3/b67d6ea49ca9154453b6d70b34ea22f3996b9fa55da105a79d8732227adc/soupsieve-2.8.1-py3-none-any.whl", hash = "sha256:a11fe2a6f3d76ab3cf2de04eb339c1be5b506a8a47f2ceb6d139803177f85434", size = 36710, upload-time = "2025-12-18T13:50:33.267Z" },
+]
+
+[[package]]
+name = "specta"
+version = "0.4.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "jupyterlite-core" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1f/a4/1965c56b9b0ede196ee54cc51cdf8cdf500e46592b8ea6dd0feb848b86d2/specta-0.4.5.tar.gz", hash = "sha256:db8f46cb22a26e30197bf940d24fab389dc5e21d1fd52742a7bc777de524345d", size = 8090327, upload-time = "2026-01-09T20:40:17.253Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3f/44/4f9cc5189d2b67a28f9781c70e7b688d0c06ca1e9cc23f3b6cf128205893/specta-0.4.5-py3-none-any.whl", hash = "sha256:45d618b55b567d97b888e0d672ac3e32923a57dbf74d6076fff4f487872b9920", size = 7799171, upload-time = "2026-01-09T20:40:15.013Z" },
 ]
 
 [[package]]
