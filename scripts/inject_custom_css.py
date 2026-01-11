@@ -5,11 +5,31 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-CUSTOM_CSS = """
-/* Custom styles for wider article view */
-.specta-cell-output {
+CSS_IDENTIFIER = "Custom styles for wider article view"
+CUSTOM_CSS = f"""
+/* {CSS_IDENTIFIER} */
+
+/*
+Force a dark background immediately to avoid a white flash
+before Specta/theme assets load.
+*/
+:root,
+html,
+body {{
+    background: #141414 !important;
+    color: #e6edf3;
+    color-scheme: dark;
+}}
+
+.specta-cell-output {{
     max-width: 900px !important;
-}
+}}
+
+/* Hide the loading spinner */
+#specta-loader-host {{
+    display: none !important;
+}}
+
 """
 
 
@@ -28,19 +48,34 @@ def inject_css(output_dir=None):
 
     # Check if already injected
     for style in soup.find_all("style"):
-        if "Custom styles for wider article view" in style.string or "":
-            print("Custom CSS already injected.")
+        style_text = style.string or ""
+        if CSS_IDENTIFIER in style_text:
+            if style_text.strip() == CUSTOM_CSS.strip():
+                print("Custom CSS already injected.")
+                return True
+            style.string = CUSTOM_CSS
+            index_path.write_text(str(soup))
+            print("Updated existing custom CSS block.")
             return True
 
-    # Find the first style tag in head and append our CSS
+    # Find the head tag
     head = soup.find("head")
     if not head:
         print("Error: No <head> tag found.")
         return False
 
+    # Prepend our CSS as the first style tag so it loads first
     style_tag = soup.new_tag("style")
     style_tag.string = CUSTOM_CSS
-    head.append(style_tag)
+    # Insert after meta tags but before other styles
+    first_style = head.find("style")
+    if first_style:
+        first_style.insert_before(style_tag)
+    else:
+        head.append(style_tag)
+
+    # Note: we intentionally avoid mutating <body class=...> here.
+    # Keeping this script limited to CSS/JS injection reduces layout flashes.
 
     index_path.write_text(str(soup))
     print(f"Injected custom CSS into {index_path}")
