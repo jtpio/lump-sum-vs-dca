@@ -8,6 +8,19 @@ from bs4 import BeautifulSoup
 CSS_IDENTIFIER = "Custom styles for wider article view"
 CUSTOM_CSS = f"""
 /* {CSS_IDENTIFIER} */
+
+/*
+Force a dark background immediately to avoid a white flash
+before Specta/theme assets load.
+*/
+:root,
+html,
+body {{
+    background: #141414 !important;
+    color: #e6edf3;
+    color-scheme: dark;
+}}
+
 .specta-cell-output {{
     max-width: 900px !important;
 }}
